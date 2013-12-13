@@ -7,6 +7,9 @@
 #include "Exceptions.h"
 
 using namespace std;
+#ifdef WIN32
+#undef main
+#endif
 int main(int argc, char **argv)
 {
    Game * _game;

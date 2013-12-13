@@ -1,10 +1,11 @@
 
 #ifdef WIN32
-#include <Windows.h>
+#include <windows.h>
 #define Alert(a,b,c,d) MessageBox(a,b,c,d)
+#undef main
 #endif
 
-#ifdef LINUX
+#ifdef __linux__
 #define Alert(a,b,c,d)
 #endif
 
