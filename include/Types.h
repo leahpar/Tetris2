@@ -2,6 +2,9 @@
 #define TYPES_H_INCLUDED
 
 #include <SDL2/SDL.h>
+
+// Some userful structures
+
 typedef struct
 {
     SDL_Rect R;

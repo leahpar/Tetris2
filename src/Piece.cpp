@@ -10,6 +10,7 @@ Piece::Piece()
    this->newType  = (rand() % NB_PIECE);
    this->curType  = this->newType;
 
+   // place the piece at the top center matrix
    this->curPos.x = 0;
    this->curPos.y = MATRIX_Y/2-2;
    this->newPos   = this->curPos;
@@ -20,6 +21,7 @@ Piece::~Piece()
    //dtor
 }
 
+// move piece in the matrix
 void Piece::movePiece(int action)
 {
    switch(action)
@@ -35,15 +37,22 @@ void Piece::movePiece(int action)
          break;
    }
 }
+
+// Rotate the piece
+// (change type)
 void Piece::rotatePiece()
 {
    this->newType = (this->curType + NB_PIECE)%(4 * NB_PIECE);
 }
+
+// change the current position as the new position
 void Piece::validNewPos()
 {
    this->curPos  = this->newPos;
    this->curType = this->newType;
 }
+
+// change the new position as the current position
 void Piece::cancelNewPos()
 {
    this->newPos  = this->curPos;
@@ -91,7 +100,7 @@ void Piece::setNewPos(Position newPos) {
 ********************************/
 
 
-
+// list of pieces
 int Piece::tabPieces[NB_PIECE*4][LG_PIECE][LG_PIECE] =
 {
    /************************ 0 *****************************/

@@ -46,11 +46,17 @@ void Player::initMatrix()
    }
 }
 
+/*****************************************************************************/
+/* get tics available to play, depend on the level */
+/*****************************************************************************/
 int Player::getTic()
 {
    return (100 - 2*this->level);
 }
 
+/*****************************************************************************/
+/* do stuff... */
+/*****************************************************************************/
 int Player::play(int a)
 {
    int action = a;
@@ -113,9 +119,12 @@ int Player::play(int a)
    return 0;
 }
 
+/*****************************************************************************/
+/* Check if there is comlpete line(s) */
+/* if so, delete those lines, level up and fight oponent */
+/*****************************************************************************/
 void Player::checkLine()
 {
-
    int c = 0;
    int x,y;
    int lines = 1;
@@ -148,19 +157,12 @@ void Player::checkLine()
    }
 }
 
+/*****************************************************************************/
+/* delete a line */
+/*****************************************************************************/
 void Player::deleteLine(int line)
 {
    int x, y;
-
-   // FX complete line
-   /*
-   for (y=1; y<MATRIX_Y-1; y++)
-   {
-      this->matrix[line][y] = PX_FX;
-   }
-   printMatrix(NULL);
-   usleep(300000);
-   */
 
    // move upper
    for (x=line; x>0; x--)
@@ -177,6 +179,9 @@ void Player::deleteLine(int line)
    }
 }
 
+/*****************************************************************************/
+/* add a line (opponent fight). Actually delete random PX */
+/*****************************************************************************/
 void Player::addLine(int lines)
 {
    int i;
@@ -189,11 +194,17 @@ void Player::addLine(int lines)
    }
 }
 
+/*****************************************************************************/
+/* update level */
+/*****************************************************************************/
 void Player::levelUp()
 {
    this->level++;
 }
 
+/*****************************************************************************/
+/* check if the piece has no collision with other piece or edge */
+/*****************************************************************************/
 int Player::checkPiece(Piece * piece)
 {
    int x,y;
@@ -213,6 +224,9 @@ int Player::checkPiece(Piece * piece)
    return 0;
 }
 
+/*****************************************************************************/
+/* move, rotate or drop a piece */
+/*****************************************************************************/
 int Player::movePiece(Piece * piece, int action)
 {
    switch(action)
@@ -250,6 +264,10 @@ int Player::movePiece(Piece * piece, int action)
    }
 }
 
+/*****************************************************************************/
+/* write the piece in the player's matrix */
+/* current player's piece is volatil      */
+/*****************************************************************************/
 void Player::writePiece(Piece * piece)
 {
    int x,y;
