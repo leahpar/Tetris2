@@ -24,7 +24,7 @@ class Game
       void setPlayers(int n);
 
       // Game content
-      void play();
+      int play();
       
       // Display the game on screen
       void display();
@@ -33,6 +33,7 @@ class Game
  
       // Pause game
       int actionPause(string str);
+      string pauseStr;
 
    protected:
    private:

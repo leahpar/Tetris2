@@ -21,7 +21,7 @@ Game::Game()
    //this->initSDL_Mixer();
 
    this->nbPlayers = 0;
-
+   this->pauseStr = "";
 }
 
 Game::~Game()
@@ -236,6 +236,13 @@ void Game::displayScore()
       text << this->players[p]->getPieces() << "    ";
    text << endl;
 
+   if (this->pauseStr.size() > 1)
+   {
+      text << endl;
+      text << endl;
+      text << this->pauseStr;
+   }
+   
    /* surface = TTF_RenderText_Solid(this->font, text.str().c_str(), FONT_COLOR); */
    surface = TTF_RenderText_Blended_Wrapped(this->font, text.str().c_str(), FONT_COLOR, MATRIX_SPACE*TILE_S);
    texture = SDL_CreateTextureFromSurface(this->renderer, surface);
@@ -251,7 +258,7 @@ void Game::displayScore()
 }
 
 
-void Game::play()
+int Game::play()
 {
    int act[this->nbPlayers];
    Action action;
@@ -260,16 +267,20 @@ void Game::play()
    SDL_Event event;
 
    // purge queue events
-   while(SDL_PollEvent(&event));
-
+   //while(SDL_PollEvent(&event));
    fill_n(act, this->nbPlayers, ACTION_NONE);
+
+   // init pause
+   p = this->actionPause(string("Press Enter to begin"));
+   if (p == ACTION_QUIT) return ACTION_QUIT;
+
    while (1)
    {
       // Get players' actions
       action = this->getAction();
 
       // Quit game
-      if (action.action == ACTION_QUIT) return;
+      if (action.action == ACTION_QUIT) return ACTION_QUIT;
 
       if (action.player >= 0)
       {
@@ -284,13 +295,14 @@ void Game::play()
          {
             if (this->players[p]->play(act[p]) == 1)
             {
-               return;
+               this->actionPause(string("Game over !"));
+               return ACTION_QUIT;
             }
             act[p] = ACTION_NONE;
          }
 
          this->display();
-         SDL_Delay(10);
+         SDL_Delay(20);
          i = 0;
       }
    }
@@ -323,8 +335,7 @@ Action Game::getAction()
             switch(event.key.keysym.sym)
             {
                case SDLK_ESCAPE:
-                  //ret = this->actionPause(string("Pause..."));
-                  ret = ACTION_QUIT;
+                  ret = this->actionPause(string("Pause..."));
                   break;
                case SDLK_m:
                   /* pause music */
@@ -405,6 +416,9 @@ int Game::actionPause(string str)
    int action = ACTION_NONE;
    SDL_Event event;
 
+   this->pauseStr = str;
+   this->display();
+
    // purge events in queue
    while(SDL_PollEvent(&event));
 
@@ -449,8 +463,9 @@ int Game::actionPause(string str)
             break;
       }
       this->display();
-      SDL_Delay(10);
+      SDL_Delay(50);
    }
+   this->pauseStr = "";
    return action;
 }
 

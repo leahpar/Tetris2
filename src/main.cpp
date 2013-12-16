@@ -22,14 +22,13 @@ int main(int argc, char **argv)
    {
       _game = new Game();
       _game->setPlayers(2);
-      _game->display();
+      //_game->display();
 
-      _game->actionPause(string("Init"));
-      _game->play();
+      action = _game->play();
 
       // wait for end pause or quit
       SDL_Event event;
-      while(action == 0)
+      while(action != ACTION_QUIT)
       {
          SDL_WaitEvent(&event);
          switch(event.type)

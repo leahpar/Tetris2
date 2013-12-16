@@ -5,7 +5,7 @@
 
 #define DT_USLEEP  30000
 
-#define MATRIX_X (30+1)
+#define MATRIX_X (20+1)
 #define MATRIX_Y (10+2)
 #define MATRIX_SPACE (12)
 
@@ -62,6 +62,7 @@
 #define ACTION_NONE        -1
 #define ACTION_QUIT        99
 #define ACTION_PAUSE       98
+#define ACTION_OVER        97
 #define ACTION_MOVE_DOWN    0
 #define ACTION_MOVE_LEFT    1
 #define ACTION_MOVE_RIGHT   2
