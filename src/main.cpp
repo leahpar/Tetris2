@@ -13,6 +13,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
    Game * _game;
+   int action = 0;
 
    // init rand
    srand(time(NULL));
@@ -28,7 +29,6 @@ int main(int argc, char **argv)
 
       // wait for end pause or quit
       SDL_Event event;
-      int action = 0;
       while(action == 0)
       {
          SDL_WaitEvent(&event);
@@ -37,20 +37,25 @@ int main(int argc, char **argv)
             case SDL_QUIT:
                action = 1;
                break;
-            default:
-               break;
+            case SDL_KEYDOWN:
+               switch(event.key.keysym.sym)
+               {
+                  case SDLK_ESCAPE:
+                     action = 1;
+                     break;
+               }
          }
          SDL_Delay(10);
       }
+      delete _game;
    }
    catch (int e)
    {
-      // Alert(NULL, "KO", NULL, 0);
+      Alert(NULL, "KO", NULL, 0);
       return e;
    }
 
    // Alert(NULL, "OK", NULL, 0);
 
-   delete _game;
    return 0;
 }

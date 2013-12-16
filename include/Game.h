@@ -54,7 +54,7 @@ class Game
 
       // player(s)
       int           nbPlayers;
-      Player       *players[];
+      Player       *players[2];
 
       // Init functions - called by constructor
       void initSDL_Video();

@@ -265,7 +265,12 @@ void Game::play()
    fill_n(act, this->nbPlayers, ACTION_NONE);
    while (1)
    {
+      // Get players' actions
       action = this->getAction();
+
+      // Quit game
+      if (action.action == ACTION_QUIT) return;
+
       if (action.player >= 0)
       {
          act[action.player] = action.action;
@@ -318,7 +323,8 @@ Action Game::getAction()
             switch(event.key.keysym.sym)
             {
                case SDLK_ESCAPE:
-                  ret = this->actionPause(string("Pause..."));
+                  //ret = this->actionPause(string("Pause..."));
+                  ret = ACTION_QUIT;
                   break;
                case SDLK_m:
                   /* pause music */
@@ -414,6 +420,9 @@ int Game::actionPause(string str)
          case SDL_KEYDOWN:
             switch(event.key.keysym.sym)
             {
+               case SDLK_ESCAPE:
+                  action = ACTION_QUIT;
+                  break;
                case SDLK_p:
                case SDLK_RETURN:
                   action = ACTION_PAUSE;
