@@ -376,7 +376,8 @@ Action Game::getAction()
                   ret = ACTION_DROP;
                   player = PLAYER_B;
                   break;
-               case SDLK_z:
+               case SDLK_z: // azerty
+               case SDLK_w: // qwerty
                   ret = ACTION_ROTATE;
                   player = PLAYER_A;
                   break;
@@ -388,7 +389,8 @@ Action Game::getAction()
                   ret = ACTION_MOVE_RIGHT;
                   player = PLAYER_A;
                   break;
-               case SDLK_q:
+               case SDLK_q: // azerty
+               case SDLK_a: // qwerty
                   ret = ACTION_MOVE_LEFT;
                   player = PLAYER_A;
                   break;
