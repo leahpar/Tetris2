@@ -31,7 +31,7 @@ mkdir ${package} 2>/dev/null
 
 cp bin/${BIN} ${package}/
 
-cp ressources/* ${package}/
+cp -r ressources ${package}/
 
 mkdir ${package}/libs 2>/dev/null
 ldd bin/${BIN} | grep SDL2 | while read lib x path x

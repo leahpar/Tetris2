@@ -80,7 +80,7 @@ mkdir ${package}
 
 cp bin/${BIN} ${package}/
 
-cp ressources/* ${package}/
+cp -r ressources ${package}/
 
 #cp /tmp/SDL2/*.dll ${package}/
 for dll in `grep "\.dll" ${PRJ}/Toolchain-mingw32.cmake | cut -d ' ' -f 2`
