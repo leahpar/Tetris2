@@ -67,6 +67,13 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake ..
 make
 ```
 
+Or you can use the all-in-one command
+
+```
+i686-w64-mingw32-g++ src/* -o bin/tetris2 -Iinclude -I/usr/i686-w64-mingw32/includes -L/usr/i686-w64-mingw32/lib -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lSDL2main -mwindows -lmingw32
+```
+
+
 ## Export package
 
 ```
