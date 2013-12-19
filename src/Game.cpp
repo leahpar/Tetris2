@@ -18,8 +18,9 @@ Game::Game()
    // may throw exceptions
    this->initSDL_Video();
    this->initSDL_ttf();
+#ifndef __APPLE__
    this->initSDL_Mixer();
-
+#endif
    this->nbPlayers = 0;
    this->pauseStr = "";
 }
@@ -377,6 +378,7 @@ Action Game::getAction()
                   player = PLAYER_B;
                   break;
                case SDLK_RCTRL:
+               case SDLK_RSHIFT:
                   ret = ACTION_DROP;
                   player = PLAYER_B;
                   break;
@@ -399,6 +401,7 @@ Action Game::getAction()
                   player = PLAYER_A;
                   break;
                case SDLK_LCTRL:
+               case SDLK_LSHIFT:
                   ret = ACTION_DROP;
                   player = PLAYER_A;
                   break;
