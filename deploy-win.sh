@@ -35,7 +35,7 @@ echo "${gre}SDL2 OK${gri}"
 
 if [ ! -e /tmp/SDL2/SDL2_image.dll ]; then
    echo "${red}SDL2-image missing...${gri}"
-   echo "downloading SDL2-image..."A
+   echo "downloading SDL2-image..."
    echo "   http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0-win32-x86.zip"
    cd /tmp/SDL2
    wget -q http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0-win32-x86.zip
@@ -68,9 +68,11 @@ cd ${PRJ}
 
 cd build
 
-rm -rf *
-
-cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake ..
+grep "/usr/bin/i686-w64-mingw32-g++" CMakeCache.txt >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+   rm -rf *
+   cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake ..
+fi
 
 make
 

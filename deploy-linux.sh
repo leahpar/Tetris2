@@ -19,9 +19,12 @@ ore="\033[33m"
 
 cd build
 
-rm -rf *
+grep "/usr/bin/c++" CMakeCache.txt >/dev/null 2>&1
 
-cmake ..
+if [ $? -ne 0 ]; then
+   rm -rf *
+   cmake ..
+fi
 
 make
 
