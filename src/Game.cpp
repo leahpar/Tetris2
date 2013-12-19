@@ -18,7 +18,7 @@ Game::Game()
    // may throw exceptions
    this->initSDL_Video();
    this->initSDL_ttf();
-   //this->initSDL_Mixer();
+   this->initSDL_Mixer();
 
    this->nbPlayers = 0;
    this->pauseStr = "";
@@ -36,8 +36,8 @@ Game::~Game()
    TTF_CloseFont(this->font);
    TTF_Quit();
 
-   //Mix_HaltMusic();
-   //Mix_FreeMusic(this->sound);
+   Mix_HaltMusic();
+   Mix_FreeMusic(this->sound);
 
    SDL_DestroyTexture(this->tileset);
    SDL_DestroyRenderer(this->renderer);
@@ -80,6 +80,7 @@ void Game::initSDL_Mixer()
       throw ERR_INIT_AUDIO_FILE;
    }
    // auto pause
+   this->pause = 1;
    //Mix_PlayMusic(this->sound, -1);
 }
 
@@ -236,6 +237,9 @@ void Game::displayScore()
       text << this->players[p]->getPieces() << "    ";
    text << endl;
 
+   text << endl;
+   text << "Music : " << ((this->pause == 1) ? "Off" : "On") << endl;
+
    if (this->pauseStr.size() > 1)
    {
       text << endl;
@@ -243,7 +247,7 @@ void Game::displayScore()
       text << this->pauseStr;
    }
    
-   /* surface = TTF_RenderText_Solid(this->font, text.str().c_str(), FONT_COLOR); */
+   //surface = TTF_RenderText_Solid(this->font, text.str().c_str(), FONT_COLOR);
    surface = TTF_RenderText_Blended_Wrapped(this->font, text.str().c_str(), FONT_COLOR, MATRIX_SPACE*TILE_S);
    texture = SDL_CreateTextureFromSurface(this->renderer, surface);
 
