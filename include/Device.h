@@ -1,5 +1,5 @@
 
-#ifdef WIN32
+#if defined WIN32 || defined _WIN32
 #include <windows.h>
 #define Alert(a,b,c,d) MessageBox(a,b,c,d)
 #undef main
