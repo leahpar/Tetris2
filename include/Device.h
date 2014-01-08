@@ -9,6 +9,6 @@
 #define Alert(a,b,c,d)
 #endif
 
-#ifdef MAC
+#ifdef __APPLE__
 #define Alert(a,b,c,d)
 #endif
